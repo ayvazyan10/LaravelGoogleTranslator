@@ -18,7 +18,6 @@ class LaravelGoogleTranslator
     {
         // request - $from "en" $to "ru" $text "text for translate"
         $req = $this->requestTranslation($from, $to, $text);
-
         // clean translation and return
         return $this->getSentencesFromJSON($req);
     }
@@ -58,9 +57,7 @@ class LaravelGoogleTranslator
         try {
             // Open connection
             $ch = curl_init();
-
             // Set the url, number of POST vars, POST data
-
             curl_setopt($ch, CURLOPT_URL, $url);
             if (Config::get('laravelgoogletranslator.proxy') !== null) {
                 curl_setopt($ch, CURLOPT_PROXY, Config::get('laravelgoogletranslator.proxy'));
@@ -71,16 +68,13 @@ class LaravelGoogleTranslator
             curl_setopt($ch, CURLOPT_ENCODING, 'UTF-8');
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
             curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-
             // Execute post
             $result = curl_exec($ch);
-
             // Close connection
             curl_close($ch);
         } catch (\Exception $exception) {
             return $exception->getMessage();
         }
-
         return $result;
     }
 
@@ -94,17 +88,13 @@ class LaravelGoogleTranslator
     protected function getSentencesFromJSON($json)
     {
         $sentencesArray = json_decode($json, true);
-
         $sentences = "";
-
         if ($sentencesArray === null) {
             throw new \Exception("Google detected unusual traffic from your computer network, try again later (2 - 48 hours) or use proxy");
         }
-
         foreach ($sentencesArray[0] as $sentence) {
             $sentences .= isset($sentence[0]) ? $sentence[0] : '';
         }
-
         return $sentences;
     }
 }
