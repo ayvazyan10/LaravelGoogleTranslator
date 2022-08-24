@@ -1,6 +1,6 @@
 <?php
 
-namespace Ayvazyan10\LaravelGoogleTranslator\Providers;
+namespace Ayvazyan10\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
