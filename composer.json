@@ -30,7 +30,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Ayvazyan10\\LaravelGoogleTranslator\\LaravelGoogleTranslatorServiceProvider"
+                "Ayvazyan10\\LaravelGoogleTranslator\\Providers\\LaravelGoogleTranslatorServiceProvider"
             ],
             "aliases": {
                 "LaravelGoogleTranslator": "Ayvazyan10\\LaravelGoogleTranslator\\Facades\\LaravelGoogleTranslator"
