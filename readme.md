@@ -8,9 +8,41 @@ Via Composer
 
 ``` bash
 composer require ayvazyan10/laravelgoogletranslator
-```
+````
 
 ## Usage
+
+Publish provider
+
+```` bash
+php artisan vendor:publish --provider="ayvazyan10\LaravelGoogleTranslator\LaravelGoogleTranslatorServiceProvider"
+````
+
+2 ways calling
+
+```` php
+use Ayvazyan10\LaravelGoogleTranslator\LaravelGoogleTranslator;
+
+$trans = new LaravelGoogleTranslator();
+
+$trans->trans('ru', 'en', 'Собака'); // result "Dog"
+````
+
+or with global function
+
+```` php
+google()->trans('es', 'en', 'buenos días'); // result "good morning"
+````
+
+if you want use proxy see config/laravelgoogletranslator.php config file
+
+```` php
+<?php
+
+return [
+    'proxy' => null, // example: ip:port
+];
+````
 
 ## Change log
 
