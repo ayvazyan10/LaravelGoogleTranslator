@@ -1,0 +1,104 @@
+<?php
+
+namespace Ayvazyan10\LaravelGoogleTranslator;
+
+class LaravelGoogleTranslator
+{
+    /**
+     * @param $from // language code en,fr,ru etc...
+     * @param $to // language code en,fr,ru etc...
+     * @param $text // text for translator
+     * @throws \Exception
+     *
+     * First inject
+     */
+    public static function gtranslate($from, $to, $text)
+    {
+        // request - $from "en" $to "ru" $text "text for translate"
+        $request = self::requestTranslation($from, $to, $text);
+
+        // clean translation and return
+        return self::getSentencesFromJSON($request);
+    }
+
+    /**
+     * @param $from
+     * @param $to
+     * @param $text
+     * @return bool|string
+     * @throws \Exception
+     *
+     * Request to the translator service
+     */
+    protected static function requestTranslation($from, $to, $text)
+    {
+        if (strlen($text) >= 5000) {
+            throw new \Exception("Maximum number of characters exceeded: 5000");
+        }
+
+        // Google Translator URL
+        $url = "https://translate.googleapis.com/translate_a/single?client=gtx&dt=t";
+
+        $f_items = [
+            'sl' => urlencode($from),
+            'tl' => urlencode($to),
+            'q' => urlencode($text),
+        ];
+
+        // preparing data for the POST
+        $f_string = "";
+        foreach ($f_items as $key => $value) {
+            $f_string .= '&' . $key . '=' . $value;
+        }
+//        $proxy = '23.107.176.100';
+//        $proxyPort = '32180';
+
+        $f_string = rtrim($f_string, '&');
+
+        // Open connection
+        $ch = curl_init();
+
+        // Set the url, number of POST vars, POST data
+        curl_setopt($ch, CURLOPT_URL, $url);
+//        curl_setopt($ch, CURLOPT_PROXY, $proxy);
+//        curl_setopt($ch, CURLOPT_PROXYPORT, $proxyPort);
+        curl_setopt($ch, CURLOPT_POST, count($f_items));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $f_string);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_ENCODING, 'UTF-8');
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+
+        // Execute post
+        $result = curl_exec($ch);
+
+        // Close connection
+        curl_close($ch);
+
+        return $result;
+    }
+
+    /**
+     * @param $json
+     * @return object
+     * @throws \Exception
+     *
+     * Dump of the JSON's response in an array
+     */
+    protected static function getSentencesFromJSON($json): string
+    {
+        $sentencesArray = json_decode($json, true);
+
+        $sentences = "";
+
+        if (!$sentencesArray || !isset($sentencesArray[0])) {
+            throw new \Exception("Google detected unusual traffic from your computer network, try again later (2 - 48 hours) - use proxy");
+        }
+
+        foreach ($sentencesArray[0] as $sentence) {
+            $sentences .= isset($sentence[0]) ?? $sentence[0];
+        }
+
+        return $sentences;
+    }
+}

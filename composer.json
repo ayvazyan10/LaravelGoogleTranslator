@@ -1,0 +1,37 @@
+{
+    "name": "ayvazyan10/laravelgoogletranslator",
+    "description": "Translating texts with google translation service for free but with limits (use proxy)",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Razmik Ayvazyan",
+            "email": "ayvazyan403@gmail.com",
+            "homepage": "https://ayvazyan.pro"
+        }
+    ],
+    "homepage": "https://github.com/ayvazyan10/laravelgoogletranslator",
+    "keywords": ["Laravel", "LaravelGoogleTranslator", "google", "translator"],
+    "require": {
+        "php": ">=7.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ayvazyan10\\LaravelGoogleTranslator\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Ayvazyan10\\LaravelGoogleTranslator\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Ayvazyan10\\LaravelGoogleTranslator\\LaravelGoogleTranslatorServiceProvider"
+            ],
+            "aliases": {
+                "LaravelGoogleTranslator": "Ayvazyan10\\LaravelGoogleTranslator\\Facades\\LaravelGoogleTranslator"
+            }
+        }
+    }
+}
