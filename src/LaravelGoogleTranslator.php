@@ -2,6 +2,8 @@
 
 namespace Ayvazyan10\LaravelGoogleTranslator;
 
+use Illuminate\Support\Facades\Config;
+
 class LaravelGoogleTranslator
 {
     /**
@@ -60,7 +62,7 @@ class LaravelGoogleTranslator
             // Set the url, number of POST vars, POST data
 
             curl_setopt($ch, CURLOPT_URL, $url);
-            if (config(laravelgoogletranslator . proxy) !== null) {
+            if (Config::get('constants.pagination.items_per_page') !== null) {
                 curl_setopt($ch, CURLOPT_PROXY, config(laravelgoogletranslator . proxy));
             }
 //            curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.2; WOW64; rv:17.0) Gecko/20100101 Firefox/17.0');
