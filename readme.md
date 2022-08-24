@@ -15,7 +15,7 @@ composer require ayvazyan10/laravelgoogletranslator
 Publish provider for config file
 
 ```` bash
-php artisan vendor:publish --provider="ayvazyan10\LaravelGoogleTranslator\LaravelGoogleTranslatorServiceProvider"
+php artisan vendor:publish --provider="Ayvazyan10\LaravelGoogleTranslator\LaravelGoogleTranslatorServiceProvider"
 ````
 
 2 ways calling
