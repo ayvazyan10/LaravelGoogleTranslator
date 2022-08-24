@@ -4,6 +4,7 @@ namespace Ayvazyan10\LaravelGoogleTranslator;
 
 use Illuminate\Support\Facades\Config;
 
+
 class LaravelGoogleTranslator
 {
     /**
