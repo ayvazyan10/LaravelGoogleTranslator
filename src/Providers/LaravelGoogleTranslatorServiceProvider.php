@@ -1,6 +1,6 @@
 <?php
 
-namespace Ayvazyan10\LaravelGoogleTranslator;
+namespace Ayvazyan10\LaravelGoogleTranslator\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -13,6 +13,7 @@ class LaravelGoogleTranslatorServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+//        dd('ok');
         // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'ayvazyan10');
         // $this->loadViewsFrom(__DIR__.'/../resources/views', 'ayvazyan10');
         // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
@@ -31,12 +32,12 @@ class LaravelGoogleTranslatorServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/laravelgoogletranslator.php', 'laravelgoogletranslator');
-
-        // Register the service the package provides.
-        $this->app->singleton('laravelgoogletranslator', function ($app) {
-            return new LaravelGoogleTranslator;
-        });
+//        $this->mergeConfigFrom(__DIR__.'/../config/laravelgoogletranslator.php', 'laravelgoogletranslator');
+//
+//        // Register the service the package provides.
+//        $this->app->singleton('laravelgoogletranslator', function ($app) {
+//            return new LaravelGoogleTranslator;
+//        });
     }
 
     /**

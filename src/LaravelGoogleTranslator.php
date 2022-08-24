@@ -12,13 +12,13 @@ class LaravelGoogleTranslator
      *
      * First inject
      */
-    public static function gtranslate($from, $to, $text)
+    public function trans($from, $to, $text)
     {
         // request - $from "en" $to "ru" $text "text for translate"
-        $request = self::requestTranslation($from, $to, $text);
+        $req = $this->requestTranslation($from, $to, $text);
 
         // clean translation and return
-        return self::getSentencesFromJSON($request);
+        return $this->getSentencesFromJSON($req);
     }
 
     /**
@@ -30,7 +30,7 @@ class LaravelGoogleTranslator
      *
      * Request to the translator service
      */
-    protected static function requestTranslation($from, $to, $text)
+    protected function requestTranslation($from, $to, $text)
     {
         if (strlen($text) >= 5000) {
             throw new \Exception("Maximum number of characters exceeded: 5000");
@@ -55,25 +55,29 @@ class LaravelGoogleTranslator
 
         $f_string = rtrim($f_string, '&');
 
-        // Open connection
-        $ch = curl_init();
+        try {
+            // Open connection
+            $ch = curl_init();
 
-        // Set the url, number of POST vars, POST data
-        curl_setopt($ch, CURLOPT_URL, $url);
+            // Set the url, number of POST vars, POST data
+            curl_setopt($ch, CURLOPT_URL, $url);
 //        curl_setopt($ch, CURLOPT_PROXY, $proxy);
 //        curl_setopt($ch, CURLOPT_PROXYPORT, $proxyPort);
-        curl_setopt($ch, CURLOPT_POST, count($f_items));
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $f_string);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_ENCODING, 'UTF-8');
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+            curl_setopt($ch, CURLOPT_POST, count($f_items));
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $f_string);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_ENCODING, 'UTF-8');
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 
-        // Execute post
-        $result = curl_exec($ch);
+            // Execute post
+            $result = curl_exec($ch);
 
-        // Close connection
-        curl_close($ch);
+            // Close connection
+            curl_close($ch);
+        } catch (\Exception $exception) {
+            dd($exception->getMessage());
+        }
 
         return $result;
     }
@@ -85,7 +89,7 @@ class LaravelGoogleTranslator
      *
      * Dump of the JSON's response in an array
      */
-    protected static function getSentencesFromJSON($json): string
+    protected function getSentencesFromJSON($json)
     {
         $sentencesArray = json_decode($json, true);
 
@@ -96,7 +100,7 @@ class LaravelGoogleTranslator
         }
 
         foreach ($sentencesArray[0] as $sentence) {
-            $sentences .= isset($sentence[0]) ?? $sentence[0];
+            $sentences = isset($sentence[0]) ? $sentence[0] : '';
         }
 
         return $sentences;

@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'ip' => null,
-    'port' => null
+    'ip' => null, // proxy ip address
+    'port' => null // proxy port number
 ];
