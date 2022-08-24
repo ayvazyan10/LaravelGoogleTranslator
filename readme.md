@@ -65,6 +65,7 @@ If you discover any security related issues, please email ayvazyan403@gmail.com 
 ## Credits
 
 - [Razmik Ayvazyan][link-author]
+- <a href="https://github.com/vahanspetrosyan">Vahan Petrosyan</a>
 - [All Contributors][link-contributors]
 
 ## License
