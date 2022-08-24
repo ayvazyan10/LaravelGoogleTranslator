@@ -63,9 +63,8 @@ class LaravelGoogleTranslator
 
             curl_setopt($ch, CURLOPT_URL, $url);
             if (Config::get('laravelgoogletranslator.proxy') !== null) {
-                curl_setopt($ch, CURLOPT_PROXY, config(laravelgoogletranslator . proxy));
+                curl_setopt($ch, CURLOPT_PROXY, Config::get('laravelgoogletranslator.proxy'));
             }
-            //            curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.2; WOW64; rv:17.0) Gecko/20100101 Firefox/17.0');
             curl_setopt($ch, CURLOPT_POST, count($f_items));
             curl_setopt($ch, CURLOPT_POSTFIELDS, $f_string);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
