@@ -58,11 +58,12 @@ class LaravelGoogleTranslator
             $ch = curl_init();
 
             // Set the url, number of POST vars, POST data
+
             curl_setopt($ch, CURLOPT_URL, $url);
-            if (config(laravelgoogletranslator . ip) !== null) {
-                curl_setopt($ch, CURLOPT_PROXY, config(laravelgoogletranslator . ip));
-                curl_setopt($ch, CURLOPT_PROXYPORT, config(laravelgoogletranslator . port));
+            if (config(laravelgoogletranslator . proxy) !== null) {
+                curl_setopt($ch, CURLOPT_PROXY, config(laravelgoogletranslator . proxy));
             }
+            curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.2; WOW64; rv:17.0) Gecko/20100101 Firefox/17.0');
             curl_setopt($ch, CURLOPT_POST, count($f_items));
             curl_setopt($ch, CURLOPT_POSTFIELDS, $f_string);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -75,6 +76,7 @@ class LaravelGoogleTranslator
 
             // Close connection
             curl_close($ch);
+            dd($result);
         } catch (\Exception $exception) {
             return $exception->getMessage();
         }
@@ -95,12 +97,12 @@ class LaravelGoogleTranslator
 
         $sentences = "";
 
-        if (!$sentencesArray || !isset($sentencesArray[0])) {
-            throw new \Exception("Google detected unusual traffic from your computer network, try again later (2 - 48 hours) - use proxy");
+        if ($sentencesArray === null) {
+            throw new \Exception("Google detected unusual traffic from your computer network, try again later (2 - 48 hours) or use proxy");
         }
 
         foreach ($sentencesArray[0] as $sentence) {
-            $sentences = isset($sentence[0]) ? $sentence[0] : '';
+            $sentences .= isset($sentence[0]) ? $sentence[0] : '';
         }
 
         return $sentences;
