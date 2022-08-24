@@ -1,18 +1,13 @@
 # LaravelGoogleTranslator
 
-[![Latest Version on Packagist][ico-version]][link-packagist]
-[![Total Downloads][ico-downloads]][link-downloads]
-[![Build Status][ico-travis]][link-travis]
-[![StyleCI][ico-styleci]][link-styleci]
-
-This is where your description should go. Take a look at [contributing.md](contributing.md) to see a to do list.
+Translating texts with google translation service for free but with ip limits (use proxy) Take a look at [contributing.md](contributing.md) to see a to do list.
 
 ## Installation
 
 Via Composer
 
 ``` bash
-$ composer require ayvazyan10/laravelgoogletranslator
+composer require ayvazyan10/laravelgoogletranslator
 ```
 
 ## Usage
@@ -24,7 +19,7 @@ Please see the [changelog](changelog.md) for more information on what has change
 ## Testing
 
 ``` bash
-$ composer test
+composer test
 ```
 
 ## Contributing
@@ -33,11 +28,11 @@ Please see [contributing.md](contributing.md) for details and a todolist.
 
 ## Security
 
-If you discover any security related issues, please email author@email.com instead of using the issue tracker.
+If you discover any security related issues, please email ayvazyan403@gmail.com instead of using the issue tracker.
 
 ## Credits
 
-- [Author Name][link-author]
+- [Razmik Ayvazyan][link-author]
 - [All Contributors][link-contributors]
 
 ## License
