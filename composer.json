@@ -12,7 +12,8 @@
     "homepage": "https://github.com/ayvazyan10/laravelgoogletranslator",
     "keywords": ["Laravel", "LaravelGoogleTranslator", "google", "translator"],
     "require": {
-        "php": ">=7.0.0"
+        "php": ">=7.0.0",
+        "ayvazyan10/laravelgoogletranslator": "1.*"
     },
     "autoload": {
         "files": [
