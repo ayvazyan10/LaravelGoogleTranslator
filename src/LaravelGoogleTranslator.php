@@ -50,8 +50,6 @@ class LaravelGoogleTranslator
         foreach ($f_items as $key => $value) {
             $f_string .= '&' . $key . '=' . $value;
         }
-//        $proxy = '23.107.176.100';
-//        $proxyPort = '32180';
 
         $f_string = rtrim($f_string, '&');
 
@@ -61,8 +59,10 @@ class LaravelGoogleTranslator
 
             // Set the url, number of POST vars, POST data
             curl_setopt($ch, CURLOPT_URL, $url);
-//        curl_setopt($ch, CURLOPT_PROXY, $proxy);
-//        curl_setopt($ch, CURLOPT_PROXYPORT, $proxyPort);
+            if (config(laravelgoogletranslator . ip) !== null) {
+                curl_setopt($ch, CURLOPT_PROXY, config(laravelgoogletranslator . ip));
+                curl_setopt($ch, CURLOPT_PROXYPORT, config(laravelgoogletranslator . port));
+            }
             curl_setopt($ch, CURLOPT_POST, count($f_items));
             curl_setopt($ch, CURLOPT_POSTFIELDS, $f_string);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -76,7 +76,7 @@ class LaravelGoogleTranslator
             // Close connection
             curl_close($ch);
         } catch (\Exception $exception) {
-            dd($exception->getMessage());
+            return $exception->getMessage();
         }
 
         return $result;
