@@ -2,6 +2,8 @@
 
 namespace Ayvazyan10\LaravelGoogleTranslator;
 
+use Illuminate\Support\Facades\Config;
+
 class LaravelGoogleTranslator
 {
     /**
@@ -60,10 +62,10 @@ class LaravelGoogleTranslator
             // Set the url, number of POST vars, POST data
 
             curl_setopt($ch, CURLOPT_URL, $url);
-            if (config(laravelgoogletranslator . proxy) !== null) {
+            if (Config::get('laravelgoogletranslator.proxy') !== null) {
                 curl_setopt($ch, CURLOPT_PROXY, config(laravelgoogletranslator . proxy));
             }
-//            curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.2; WOW64; rv:17.0) Gecko/20100101 Firefox/17.0');
+            // curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.2; WOW64; rv:17.0) Gecko/20100101 Firefox/17.0');
             curl_setopt($ch, CURLOPT_POST, count($f_items));
             curl_setopt($ch, CURLOPT_POSTFIELDS, $f_string);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -85,12 +87,12 @@ class LaravelGoogleTranslator
 
     /**
      * @param $json
-     * @return object
+     * @return string
      * @throws \Exception
      *
      * Dump of the JSON's response in an array
      */
-    protected function getSentencesFromJSON($json)
+    protected function getSentencesFromJSON($json): string
     {
         $sentencesArray = json_decode($json, true);
 
