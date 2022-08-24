@@ -76,7 +76,6 @@ class LaravelGoogleTranslator
 
             // Close connection
             curl_close($ch);
-            dd($result);
         } catch (\Exception $exception) {
             return $exception->getMessage();
         }
