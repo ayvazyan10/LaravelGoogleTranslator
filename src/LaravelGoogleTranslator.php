@@ -62,8 +62,8 @@ class LaravelGoogleTranslator
             // Set the url, number of POST vars, POST data
             curl_setopt($ch, CURLOPT_URL, $url);
 
-            if (Config::get('laravelgoogletranslator.proxy') !== null) {
-                curl_setopt($ch, CURLOPT_PROXY, Config::get('laravelgoogletranslator.proxy'));
+            if (count(Config::get('laravelgoogletranslator.proxy')) > 0) {
+                curl_setopt($ch, CURLOPT_PROXY, array_rand(Config::get('laravelgoogletranslator.proxy'), 1));
             }
 
             curl_setopt($ch, CURLOPT_POST, count($f_items));

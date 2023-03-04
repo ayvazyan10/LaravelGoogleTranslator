@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'proxy' => null, // example: ip:port
+    'proxy' => [], // example: ['http://username:password@ip:port']
 ];
